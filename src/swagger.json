@@ -1,0 +1,125 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Atlas",
+    "description": "Essa é uma documentação para o Atlas API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "alan.amorim.franca@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [ "users" ],
+        "summary": "Cria um novo usuário",
+        "description": "Essa rota faz toda a regra de negócio para criar um usuário",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Jhon Doe",
+                  "email": "jhon.doe@mail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "This email has already taken."
+          }
+        }
+      },
+      "get": {
+        "tags": [ "users" ],
+        "summary": "Lista os usuários",
+        "description": "Essa rota faz toda a regra de negócio para criar um usuário",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "Id válido de usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuários"
+          },
+          "400": {
+            "description": "This user doesnt exists | This user cant access this resource"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [ "users" ],
+        "summary": "Atualiza um usuário tornando-o admin",
+        "description": "Essa rota recebe um user_id (id de usuário) e atualiza o mesmo, permitindo acessar os recursos de admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Id válido de usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responde com um objeto de usuário com o o parametro admin ativo"
+          },
+          "404": {
+            "description": "This user doesnt exists"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [ "users" ],
+        "summary": "Pesquisa um perfil de usuário",
+        "description": "Essa rota recebe um user_id (id de usuário) e retorna suas informações se ele existir",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Id válido de usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responde o perfil do usuário atual"
+          },
+          "404": {
+            "description": "This user doesnt exists"
+          }
+        }
+      }
+    }
+  }
+}
