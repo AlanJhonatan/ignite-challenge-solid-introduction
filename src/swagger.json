@@ -13,7 +13,7 @@
       "post": {
         "tags": [ "users" ],
         "summary": "Cria um novo usuário",
-        "description": "Essa rota faz toda a regra de negócio para criar um usuário",
+        "description": "Essa rota é responsável por criar um novo usuário.",
         "requestBody": {
           "content": {
             "application/json": {
